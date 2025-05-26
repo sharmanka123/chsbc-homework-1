@@ -1,0 +1,21 @@
+1.
+array = [4, 4, 5, 6, 6, 5]
+
+frequency = Hash.new(0)
+array.each do |num|
+  frequency[num] += 1
+end
+max_freq = frequency.values.max
+most_frequent = frequency.select { |key, value| value == max_freq }.keys
+puts "Найчастіший(-і) елемент(-и): #{most_frequent.join(', ')}"
+2.
+sentence = "I love pizza!"
+def to_pig_latin(word)
+  punctuation = word[-1] =~ /[[:punct:]]/ ? word[-1] : ""
+  word = word[0...-1] if punctuation != ""
+  return word + "ay" + punctuation if word.length == 1
+  pig_word = word[1..-1] + word[0] + "ay"
+  pig_word + punctuation
+end
+converted = sentence.split.map { |word| to_pig_latin(word) }
+puts "Pig Latin: #{converted.join(' ')}"
