@@ -1,0 +1,22 @@
+require 'json'
+unless File.exist?("users.json")
+  users = [
+    { "name" => "Alice", "age" => 35 },
+    { "name" => "Bob", "age" => 25 },
+    { "name" => "Charlie", "age" => 29 }
+  ]
+  File.write("users.json", JSON.pretty_generate(users))
+end
+file = File.read("users.json")
+users = JSON.parse(file)
+puts "Користувачі:"
+total_age = 0
+
+users.each do |user|
+  puts "Name: #{user["name"]}, Age: #{user["age"]}"
+  total_age += user["age"]
+end
+if users.any?
+  average = total_age.to_f / users.size
+  puts "\nСередній вік: #{average.round(2)}"
+end
